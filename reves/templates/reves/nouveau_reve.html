@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>NUREVE - Écrire un rêve</title>
+    <style>
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            margin: 0; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh; 
+            background: linear-gradient(135deg, #1e1e2f 0%, #4b4b7a 100%); 
+            color: white;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+        }
+        h1 { font-size: 2em; margin-bottom: 20px; color: #a29bfe; }
+        
+        /* Style du formulaire */
+        form p { text-align: left; margin-bottom: 15px; }
+        
+        label { display: block; margin-bottom: 8px; font-weight: bold; }
+        
+        /* On stylise les champs texte et la zone de texte */
+        input, textarea, select {
+            width: 100%;
+            padding: 12px;
+            border-radius: 10px;
+            border: none;
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+            font-size: 1em;
+            box-sizing: border-box;
+        }
+        
+        textarea { min-height: 150px; resize: vertical; }
+
+        .btn-save {
+            background-color: #6c5ce7;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1em;
+            cursor: pointer;
+            margin-top: 20px;
+            width: 100%;
+            transition: 0.3s;
+        }
+        .btn-save:hover { background-color: #a29bfe; transform: scale(1.02); }
+        
+        .back-link { display: block; margin-top: 20px; color: #ddd; text-decoration: none; font-size: 0.9em; }
+        .back-link:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Raconte ton rêve... 🌙</h1>
+        <p style="opacity: 0.8; margin-bottom: 25px;">Chaque détail compte avant qu'il ne s'évapore.</p>
+
+        <form method="POST">
+            {% csrf_token %}
+            
+            {{ form.as_p }}
+            
+            <button type="submit" class="btn-save">Enregistrer dans mon journal</button>
+        </form>
+
+        <a href="{% url 'accueil' %}" class="back-link">← Annuler et revenir</a>
+    </div>
+</body>
+</html>

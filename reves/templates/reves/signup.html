@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>NUREVE - Inscription</title>
+    <style>
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            margin: 0; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh; /* Utilise min-height pour les longs formulaires */
+            background: linear-gradient(135deg, #1e1e2f 0%, #4b4b7a 100%); 
+            color: white;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            width: 100%;
+            max-width: 450px;
+            text-align: center;
+            margin: 20px;
+        }
+        h1 { margin-bottom: 10px; font-size: 2em; }
+        p.subtitle { margin-bottom: 30px; opacity: 0.8; }
+
+        /* --- STYLE DU FORMULAIRE DJANGO --- */
+        form p {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+        
+        /* Rend les titres des champs (Username, Password) visibles */
+        label {
+            display: block;
+            color: white;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        /* Style des cases de saisie */
+        input {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: none;
+            box-sizing: border-box;
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+        }
+
+        /* Rend les petits textes d'aide lisibles */
+        .helptext {
+            display: block;
+            color: #ccc;
+            font-size: 0.8em;
+            margin-top: 5px;
+            line-height: 1.4;
+        }
+
+        /* Style pour les erreurs */
+        .errorlist {
+            color: #ff7675;
+            padding: 0;
+            list-style: none;
+            font-size: 0.85em;
+            text-align: left;
+            margin-bottom: 10px;
+        }
+
+        .btn-submit {
+            background-color: #6c5ce7;
+            color: white;
+            border: none;
+            padding: 15px;
+            width: 100%;
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: 0.3s;
+        }
+        .btn-submit:hover { background-color: #a29bfe; transform: translateY(-2px); }
+        
+        .footer-link { margin-top: 20px; display: block; color: #ddd; text-decoration: none; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Rejoindre NUREVE 🌙</h1>
+        <p class="subtitle">Crée ton compte pour sauvegarder tes rêves.</p>
+
+        <form method="post">
+            {% csrf_token %}
+            
+            {% if form.errors %}
+                <div class="errorlist">
+                    Attention : veuillez corriger les erreurs ci-dessous.
+                </div>
+            {% endif %}
+
+            {{ form.as_p }}
+            
+            <button type="submit" class="btn-submit">Créer mon compte</button>
+        </form>
+
+        <a href="{% url 'accueil' %}" class="footer-link">← Retour à l'accueil</a>
+    </div>
+</body>
+</html>
