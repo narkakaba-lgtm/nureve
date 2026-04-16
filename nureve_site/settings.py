@@ -10,7 +10,8 @@ SECRET_KEY = 'django-insecure-t*=dtzxp-&p7rzz@mk5xlshv)p)6d262hasxy5=r0u_kkn378f
 DEBUG = True 
 
 # CHANGE CECI : Ajoute ton nom de domaine ici (ex: ['://pythonanywhere.com'])
-ALLOWED_HOSTS = ['*'] 
+ALLOWED_HOSTS = ['://onrender.com', 'localhost', '127.0.0.1']
+
 
 
 # --- APPLICATIONS ---
