@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>NUREVE - Accueil</title>
+    <style>
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            margin: 0; 
+            padding: 0; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            background: linear-gradient(135deg, #1e1e2f 0%, #4b4b7a 100%); 
+            color: white;
+            text-align: center;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 50px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            max-width: 650px;
+            width: 90%;
+        }
+        h1 { font-size: 3.5em; margin-bottom: 10px; letter-spacing: 2px; }
+        p.tagline { font-size: 1.2em; margin-bottom: 40px; opacity: 0.8; font-style: italic; }
+        
+        .button-group {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 28px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 0.95em;
+        }
+        
+        /* Couleurs des boutons */
+        .btn-primary { background-color: #6c5ce7; color: white; box-shadow: 0 4px 15px rgba(108, 92, 231, 0.3); }
+        .btn-secondary { border: 2px solid rgba(255,255,255,0.7); color: white; }
+        .btn-premium { background: linear-gradient(90deg, #f1c40f, #f39c12); color: white; box-shadow: 0 4px 15px rgba(241, 196, 15, 0.3); }
+        .btn-danger { background-color: #ff7675; color: white; }
+
+        .btn:hover { transform: scale(1.05); opacity: 1; filter: brightness(1.1); }
+        
+        .user-welcome { width: 100%; margin-bottom: 25px; font-size: 1.3em; color: #a29bfe; font-weight: bold; }
+        
+        hr { width: 50%; border: 0; border-top: 1px solid rgba(255,255,255,0.1); margin: 30px auto; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>NUREVE 🌙</h1>
+        <p class="tagline">Tes rêves méritent d'être écrits avant de s'envoler.</p>
+        
+        <div class="button-group">
+            {% if user.is_authenticated %}
+                <!-- Options pour l'utilisateur connecté -->
+                <div class="user-welcome">Ravi de te revoir, {{ user.username }} ! ✨</div>
+                
+                <a href="{% url 'nouveau_reve' %}" class="btn btn-primary">✍️ Écrire un rêve</a>
+                <a href="{% url 'mes_reves' %}" class="btn btn-secondary">📖 Mon Journal</a>
+                <a href="{% url 'espace_public' %}" class="btn btn-secondary">🌍 Espace Public</a>
+                
+                <form action="{% url 'logout' %}" method="post" style="display: inline; width: 100%; margin-top: 10px;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">Se déconnecter</button>
+                </form>
+            {% else %}
+                <!-- Options pour l'utilisateur déconnecté -->
+                <a href="{% url 'login' %}" class="btn btn-primary">Connexion</a>
+                <a href="{% url 'signup' %}" class="btn btn-secondary">S'inscrire</a>
+                <a href="{% url 'espace_public' %}" class="btn btn-secondary">Espace Public</a>
+            {% endif %}
+        </div>
+
+        <hr>
+
+        <div class="premium-box">
+            <a href="{% url 'abonnement' %}" class="btn btn-premium">⭐ Devenir Premium (3$)</a>
+            <p style="font-size: 0.8em; margin-top: 10px; opacity: 0.6;">Débloque l'interprétation par IA et un stockage illimité.</p>
+        </div>
+    </div>
+</body>
+</html>
