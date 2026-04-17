@@ -2,113 +2,116 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>NUREVE - Inscription</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Inscription - NUREVE</title>
+    <link href="https://jsdelivr.net" rel="stylesheet">
     <style>
-        body { 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+        /* Cohérence totale avec l'accueil et la connexion */
+        html, body { 
             margin: 0; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            min-height: 100vh; /* Utilise min-height pour les longs formulaires */
-            background: linear-gradient(135deg, #1e1e2f 0%, #4b4b7a 100%); 
+            background: #111827; 
+            font-family: system-ui, -apple-system, sans-serif;
             color: white;
         }
-        .container {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 40px;
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(180deg, #111827 0%, #1f2937 100%);
+            min-height: 100vh;
+            padding: 20px 0;
+        }
+
+        .signup-container {
             width: 100%;
             max-width: 450px;
+            padding: 30px;
             text-align: center;
-            margin: 20px;
         }
-        h1 { margin-bottom: 10px; font-size: 2em; }
-        p.subtitle { margin-bottom: 30px; opacity: 0.8; }
 
-        /* --- STYLE DU FORMULAIRE DJANGO --- */
-        form p {
-            text-align: left;
-            margin-bottom: 20px;
-        }
+        h1 { font-weight: 800; font-size: 1.8rem; margin-bottom: 10px; letter-spacing: -1px; }
+        .subtitle { color: #9ca3af; font-size: 0.95rem; margin-bottom: 30px; }
+
+        /* Style du formulaire Django */
+        form p { text-align: left; margin-bottom: 20px; }
+        label { display: block; font-size: 0.85rem; color: #818cf8; margin-bottom: 6px; font-weight: 600; }
         
-        /* Rend les titres des champs (Username, Password) visibles */
-        label {
-            display: block;
+        input { 
+            width: 100%; 
+            padding: 14px; 
+            border-radius: 12px; 
+            border: 1px solid rgba(255,255,255,0.1); 
+            background: rgba(255,255,255,0.05); 
             color: white;
-            font-weight: bold;
-            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+        input:focus { outline: none; border-color: #6366f1; background: rgba(255,255,255,0.08); }
+
+        /* Textes d'aide Django (ex: règles du mot de passe) */
+        .helptext { 
+            display: block; 
+            font-size: 0.75rem; 
+            color: #6b7280; 
+            margin-top: 5px; 
+            line-height: 1.3;
         }
 
-        /* Style des cases de saisie */
-        input {
-            width: 100%;
-            padding: 12px;
-            border-radius: 8px;
-            border: none;
-            box-sizing: border-box;
-            background: rgba(255, 255, 255, 0.9);
-            color: #333;
-        }
-
-        /* Rend les petits textes d'aide lisibles */
-        .helptext {
-            display: block;
-            color: #ccc;
-            font-size: 0.8em;
-            margin-top: 5px;
-            line-height: 1.4;
-        }
-
-        /* Style pour les erreurs */
+        /* Liste des erreurs */
         .errorlist {
-            color: #ff7675;
-            padding: 0;
             list-style: none;
-            font-size: 0.85em;
+            padding: 0;
+            color: #f87171;
+            font-size: 0.8rem;
             text-align: left;
-            margin-bottom: 10px;
+            margin-top: 5px;
         }
 
         .btn-submit {
-            background-color: #6c5ce7;
+            background: #6366f1;
             color: white;
+            padding: 16px;
+            border-radius: 14px;
+            font-weight: 600;
             border: none;
-            padding: 15px;
             width: 100%;
-            border-radius: 50px;
-            font-weight: bold;
-            cursor: pointer;
             margin-top: 10px;
-            transition: 0.3s;
+            transition: 0.2s;
         }
-        .btn-submit:hover { background-color: #a29bfe; transform: translateY(-2px); }
-        
-        .footer-link { margin-top: 20px; display: block; color: #ddd; text-decoration: none; font-size: 0.9em; }
+        .btn-submit:active { transform: scale(0.98); }
+
+        .footer-link { 
+            margin-top: 25px; 
+            display: block; 
+            color: #9ca3af; 
+            text-decoration: none; 
+            font-size: 0.9rem;
+        }
+        .footer-link strong { color: #818cf8; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Rejoindre NUREVE 🌙</h1>
-        <p class="subtitle">Crée ton compte pour sauvegarder tes rêves.</p>
 
+    <div class="signup-container">
+        <h1>Rejoindre NUREVE 🌙</h1>
+        <p class="subtitle">Commencez à archiver vos nuits dès maintenant.</p>
+        
         <form method="post">
             {% csrf_token %}
             
-            {% if form.errors %}
-                <div class="errorlist">
-                    Attention : veuillez corriger les erreurs ci-dessous.
-                </div>
-            {% endif %}
-
+            {# Django insère les champs et erreurs ici #}
             {{ form.as_p }}
             
             <button type="submit" class="btn-submit">Créer mon compte</button>
         </form>
 
-        <a href="{% url 'accueil' %}" class="footer-link">← Retour à l'accueil</a>
+        <a href="{% url 'login' %}" class="footer-link">
+            Déjà inscrit ? <strong>Se connecter</strong>
+        </a>
+        <a href="{% url 'accueil' %}" class="footer-link" style="margin-top: 10px; font-size: 0.8rem;">
+            ← Retour à l'accueil
+        </a>
     </div>
+
 </body>
 </html>
