@@ -6,10 +6,11 @@
     <title>Nureve - Vos rêves</title>
     <link href="https://jsdelivr.net" rel="stylesheet">
     <style>
-        body { background: #f4f7f6; font-family: 'Inter', sans-serif; }
+        body { background: #f8f9fa; font-family: 'Segoe UI', sans-serif; }
         .hero { background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); color: white; padding: 80px 20px; border-radius: 0 0 30px 30px; }
         .btn-custom { border-radius: 50px; padding: 12px 30px; font-weight: 600; transition: 0.3s; }
-        .card-pro { border: none; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        .card-pro { border: none; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: 0.3s; }
+        .card-pro:hover { transform: translateY(-5px); }
     </style>
 </head>
 <body>
@@ -17,7 +18,7 @@
     <header class="hero text-center shadow-lg">
         <h1 class="display-3 fw-bold mb-3">NUREVE</h1>
         <p class="lead mb-4">Ne laissez plus vos nuits s'envoler.</p>
-        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+        <div class="d-grid gap-3 d-sm-flex justify-content-sm-center">
             <a href="/login/" class="btn btn-light btn-custom shadow">Se connecter</a>
             <a href="/signup/" class="btn btn-outline-light btn-custom">Créer un compte</a>
         </div>
@@ -28,22 +29,22 @@
             <div class="col-md-4">
                 <div class="card-pro p-4 bg-white h-100">
                     <div class="display-6 mb-2">✍️</div>
-                    <h3 class="h5">Journal de bord</h3>
-                    <p class="text-muted">Notez vos rêves dès le réveil, même sur mobile.</p>
+                    <h3 class="h5 fw-bold">Journal</h3>
+                    <p class="text-muted">Notez vos rêves dès le réveil sur votre téléphone.</p>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="card-pro p-4 bg-white h-100">
                     <div class="display-6 mb-2">🌍</div>
-                    <h3 class="h5">Espace Public</h3>
-                    <p class="text-muted">Partagez vos aventures nocturnes avec le monde.</p>
+                    <h3 class="h5">Communauté</h3>
+                    <p class="text-muted">Découvrez ce que les autres ont rêvé cette nuit.</p>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="card-pro p-4 bg-white h-100">
                     <div class="display-6 mb-2">🔐</div>
-                    <h3 class="h5">Privé & Sécurisé</h3>
-                    <p class="text-muted">Vos secrets sont bien gardés dans votre espace personnel.</p>
+                    <h3 class="h5">Sécurisé</h3>
+                    <p class="text-muted">Vos rêves personnels restent totalement privés.</p>
                 </div>
             </div>
         </div>
