@@ -1,24 +1,129 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
-    <title>Mon Journal</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Mon Journal - NUREVE</title>
+    <link href="https://jsdelivr.net" rel="stylesheet">
     <style>
-        body { background: #1e1e2f; color: white; font-family: sans-serif; padding: 20px; }
-        .card { background: rgba(255,255,255,0.1); padding: 15px; margin-bottom: 10px; border-radius: 10px; }
+        html, body { 
+            margin: 0; 
+            padding: 0; 
+            background: #111827; 
+            font-family: system-ui, -apple-system, sans-serif;
+            color: white;
+        }
+
+        body {
+            background: linear-gradient(180deg, #111827 0%, #1f2937 100%);
+            min-height: 100vh;
+        }
+
+        .journal-container {
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header-box {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            padding-top: 10px;
+        }
+
+        h1 { font-weight: 800; font-size: 1.5rem; margin: 0; letter-spacing: -0.5px; }
+
+        .btn-back {
+            text-decoration: none;
+            color: #9ca3af;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* Cartes de rêves style "Bulles" */
+        .reve-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 15px;
+            transition: 0.2s;
+        }
+
+        .reve-card h3 { 
+            color: #818cf8; 
+            font-size: 1.1rem; 
+            font-weight: 700; 
+            margin-bottom: 8px; 
+        }
+
+        .reve-card p { 
+            color: #e5e7eb; 
+            font-size: 0.95rem; 
+            line-height: 1.5; 
+            margin-bottom: 12px; 
+        }
+
+        .reve-date { 
+            display: block;
+            color: #6b7280; 
+            font-size: 0.75rem; 
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .empty-msg {
+            text-align: center;
+            margin-top: 50px;
+            color: #6b7280;
+        }
+
+        /* Bouton flottant pour écrire un nouveau rêve */
+        .btn-add {
+            position: fixed;
+            bottom: 30px;
+            right: 20px;
+            background: #6366f1;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.4);
+            text-decoration: none;
+            z-index: 1000;
+        }
     </style>
 </head>
 <body>
-    <h1>Mes Rêves Privés 🌙</h1>
-    <a href="{% url 'accueil' %}" style="color: white;">← Retour</a>
-    
-    {% for r in reves %}
-        <div class="card">
-            <h3>{{ r.titre }}</h3>
-            <p>{{ r.contenu }}</p>
-            <small>Posté le {{ r.date_creation }}</small>
+
+    <div class="journal-container">
+        <div class="header-box">
+            <a href="{% url 'accueil' %}" class="btn-back">← Accueil</a>
+            <h1>Mon Journal 📖</h1>
         </div>
-    {% empty %}
-        <p>Tu n'as pas encore écrit de rêves.</p>
-    {% endfor %}
+
+        {% for r in reves %}
+            <div class="reve-card">
+                <h3>{{ r.titre }}</h3>
+                <p>{{ r.contenu }}</p>
+                <span class="reve-date">Le {{ r.date_creation|date:"d M Y" }}</span>
+            </div>
+        {% empty %}
+            <div class="empty-msg">
+                <p>Votre journal est vide...<br>Levez-vous et notez votre premier rêve !</p>
+            </div>
+        {% endfor %}
+    </div>
+
+    <!-- Bouton flottant pour mobile -->
+    <a href="{% url 'nouveau_reve' %}" class="btn-add">＋</a>
+
 </body>
 </html>
