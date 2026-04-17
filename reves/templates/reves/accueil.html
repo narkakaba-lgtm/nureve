@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nureve - Vos rêves</title>
-    <!-- Correction du lien Bootstrap (indispensable pour le design) -->
+    <!-- Bootstrap pour le design pro et mobile -->
     <link href="https://jsdelivr.net" rel="stylesheet">
     <style>
         body { background: #f8f9fa; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        /* Style amélioré pour le bandeau bleu */
+        /* Header avec dégradé moderne */
         .hero { 
             background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); 
             color: white; 
@@ -16,7 +16,8 @@
             border-radius: 0 0 50px 50px; 
         }
         .btn-custom { border-radius: 50px; padding: 12px 30px; font-weight: 600; transition: 0.3s; }
-        .btn-custom:hover { transform: scale(1.05); }
+        .btn-custom:hover { transform: scale(1.05); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+        /* Cartes de présentation */
         .card-pro { 
             border: none; 
             border-radius: 20px; 
@@ -25,15 +26,14 @@
             background: white;
         }
         .card-pro:hover { transform: translateY(-10px); }
-        .navbar-brand { font-weight: 800; letter-spacing: 2px; }
     </style>
 </head>
 <body>
 
-    <!-- Barre de navigation ajoutée pour faire pro -->
+    <!-- Barre de navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-transparent position-absolute w-100">
         <div class="container">
-            <a class="navbar-brand" href="/">NUREVE</a>
+            <a class="navbar-brand fw-bold" href="/">NUREVE</a>
         </div>
     </nav>
 
@@ -42,9 +42,9 @@
             <h1 class="display-3 fw-bold mb-3">NUREVE</h1>
             <p class="lead mb-5 opacity-75">Ne laissez plus vos nuits s'envoler.</p>
             <div class="d-grid gap-3 d-sm-flex justify-content-sm-center">
-                <!-- Liens corrigés pour Django -->
-                <a href="/login/" class="btn btn-light btn-custom shadow-lg">Se connecter</a>
-                <a href="/signup/" class="btn btn-outline-light btn-custom">Créer un compte</a>
+                <!-- LIENS CORRIGÉS ICI -->
+                <a href="/connexion/" class="btn btn-light btn-custom shadow-lg">Se connecter</a>
+                <a href="/inscription/" class="btn btn-outline-light btn-custom">Créer un compte</a>
             </div>
         </div>
     </header>
@@ -79,5 +79,7 @@
         <p class="mb-0 small">&copy; 2026 Nureve - L'application des rêveurs</p>
     </footer>
 
+    <!-- Script Bootstrap -->
+    <script src="https://jsdelivr.net"></script>
 </body>
 </html>
