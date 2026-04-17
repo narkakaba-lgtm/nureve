@@ -2,96 +2,56 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>NUREVE - Accueil</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nureve - Vos rêves</title>
+    <link href="https://jsdelivr.net" rel="stylesheet">
     <style>
-        body { 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            margin: 0; 
-            padding: 0; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            height: 100vh; 
-            background: linear-gradient(135deg, #1e1e2f 0%, #4b4b7a 100%); 
-            color: white;
-            text-align: center;
-        }
-        .container {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 50px;
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-            max-width: 650px;
-            width: 90%;
-        }
-        h1 { font-size: 3.5em; margin-bottom: 10px; letter-spacing: 2px; }
-        p.tagline { font-size: 1.2em; margin-bottom: 40px; opacity: 0.8; font-style: italic; }
-        
-        .button-group {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 15px;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 14px 28px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: 0.3s;
-            border: none;
-            cursor: pointer;
-            font-size: 0.95em;
-        }
-        
-        /* Couleurs des boutons */
-        .btn-primary { background-color: #6c5ce7; color: white; box-shadow: 0 4px 15px rgba(108, 92, 231, 0.3); }
-        .btn-secondary { border: 2px solid rgba(255,255,255,0.7); color: white; }
-        .btn-premium { background: linear-gradient(90deg, #f1c40f, #f39c12); color: white; box-shadow: 0 4px 15px rgba(241, 196, 15, 0.3); }
-        .btn-danger { background-color: #ff7675; color: white; }
-
-        .btn:hover { transform: scale(1.05); opacity: 1; filter: brightness(1.1); }
-        
-        .user-welcome { width: 100%; margin-bottom: 25px; font-size: 1.3em; color: #a29bfe; font-weight: bold; }
-        
-        hr { width: 50%; border: 0; border-top: 1px solid rgba(255,255,255,0.1); margin: 30px auto; }
+        body { background: #f4f7f6; font-family: 'Inter', sans-serif; }
+        .hero { background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); color: white; padding: 80px 20px; border-radius: 0 0 30px 30px; }
+        .btn-custom { border-radius: 50px; padding: 12px 30px; font-weight: 600; transition: 0.3s; }
+        .card-pro { border: none; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>NUREVE 🌙</h1>
-        <p class="tagline">Tes rêves méritent d'être écrits avant de s'envoler.</p>
-        
-        <div class="button-group">
-            {% if user.is_authenticated %}
-                <!-- Options pour l'utilisateur connecté -->
-                <div class="user-welcome">Ravi de te revoir, {{ user.username }} ! ✨</div>
-                
-                <a href="{% url 'nouveau_reve' %}" class="btn btn-primary">✍️ Écrire un rêve</a>
-                <a href="{% url 'mes_reves' %}" class="btn btn-secondary">📖 Mon Journal</a>
-                <a href="{% url 'espace_public' %}" class="btn btn-secondary">🌍 Espace Public</a>
-                
-                <form action="{% url 'logout' %}" method="post" style="display: inline; width: 100%; margin-top: 10px;">
-                    {% csrf_token %}
-                    <button type="submit" class="btn btn-danger">Se déconnecter</button>
-                </form>
-            {% else %}
-                <!-- Options pour l'utilisateur déconnecté -->
-                <a href="{% url 'login' %}" class="btn btn-primary">Connexion</a>
-                <a href="{% url 'signup' %}" class="btn btn-secondary">S'inscrire</a>
-                <a href="{% url 'espace_public' %}" class="btn btn-secondary">Espace Public</a>
-            {% endif %}
+
+    <header class="hero text-center shadow-lg">
+        <h1 class="display-3 fw-bold mb-3">NUREVE</h1>
+        <p class="lead mb-4">Ne laissez plus vos nuits s'envoler.</p>
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+            <a href="/login/" class="btn btn-light btn-custom shadow">Se connecter</a>
+            <a href="/signup/" class="btn btn-outline-light btn-custom">Créer un compte</a>
         </div>
+    </header>
 
-        <hr>
-
-        <div class="premium-box">
-            <a href="{% url 'abonnement' %}" class="btn btn-premium">⭐ Devenir Premium (3$)</a>
-            <p style="font-size: 0.8em; margin-top: 10px; opacity: 0.6;">Débloque l'interprétation par IA et un stockage illimité.</p>
+    <div class="container my-5 px-4">
+        <div class="row g-4 text-center">
+            <div class="col-md-4">
+                <div class="card-pro p-4 bg-white h-100">
+                    <div class="display-6 mb-2">✍️</div>
+                    <h3 class="h5">Journal de bord</h3>
+                    <p class="text-muted">Notez vos rêves dès le réveil, même sur mobile.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card-pro p-4 bg-white h-100">
+                    <div class="display-6 mb-2">🌍</div>
+                    <h3 class="h5">Espace Public</h3>
+                    <p class="text-muted">Partagez vos aventures nocturnes avec le monde.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card-pro p-4 bg-white h-100">
+                    <div class="display-6 mb-2">🔐</div>
+                    <h3 class="h5">Privé & Sécurisé</h3>
+                    <p class="text-muted">Vos secrets sont bien gardés dans votre espace personnel.</p>
+                </div>
+            </div>
         </div>
     </div>
+
+    <footer class="text-center py-4 text-muted border-top mt-5">
+        <small>&copy; 2026 Nureve - L'application des rêveurs</small>
+    </footer>
+
 </body>
 </html>
