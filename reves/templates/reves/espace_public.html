@@ -5,99 +5,132 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Espace Public - NUREVE</title>
     <style>
-        /* Base e fluidos globais */
-        html, body { margin: 0; background: #111827; font-family: system-ui, -apple-system, sans-serif; color: white; }
-        body { background: radial-gradient(circle at top, #1e1b4b 0%, #111827 100%); min-height: 100vh; padding-bottom: 60px; box-sizing: border-box; }
+        /* Base fluide et fond clair premium */
+        html, body { 
+            margin: 0; 
+            background: #f9fafb; 
+            font-family: system-ui, -apple-system, sans-serif; 
+            color: #111827; 
+        }
+        body { 
+            background: radial-gradient(circle at top, #ffffff 0%, #fff7ed 100%); 
+            min-height: 100vh; 
+            padding-bottom: 60px; 
+            box-sizing: border-box; 
+        }
 
         .container { max-width: 600px; margin: auto; padding: 20px; box-sizing: border-box; }
-        h1 { text-align: center; font-weight: 800; font-size: 2rem; margin: 20px 0 40px 0; letter-spacing: -1px; }
         
-        .btn-home { text-decoration: none; color: #9ca3af; font-size: 0.95rem; margin-bottom: 25px; display: inline-flex; align-items: center; gap: 5px; transition: color 0.2s; }
-        .btn-home:hover { color: white; }
+        /* Titre principal en Noir */
+        h1 { text-align: center; font-weight: 800; font-size: 2.2rem; margin: 20px 0 40px 0; letter-spacing: -1px; color: #111827; }
+        
+        /* Lien de retour discret avec effet hover orange */
+        .btn-home { text-decoration: none; color: #4b5563; font-size: 0.95rem; margin-bottom: 25px; display: inline-flex; align-items: center; gap: 5px; font-weight: 600; transition: color 0.2s; }
+        .btn-home:hover { color: #f97316; }
 
-        /* Cartão de Sonho Adaptável */
+        /* Carte de Rêve : Fond Blanc Pur et Ligne Orange */
         .reve-card {
-            background: rgba(31, 41, 55, 0.4);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            background: #ffffff;
+            border: 1px solid #fed7aa;
+            border-bottom: 4px solid #f97316; /* Ligne de base en orange vif */
             padding: 25px;
             border-radius: 24px;
             margin-bottom: 30px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            box-shadow: 0 10px 30px rgba(249, 115, 22, 0.04);
             box-sizing: border-box;
         }
 
-        .reve-titre { font-size: 1.5rem; font-weight: 800; color: #facc15; margin: 0 0 6px 0; line-height: 1.2; }
-        .reve-auteur { font-size: 0.85rem; color: #9ca3af; margin-bottom: 20px; }
-        .reve-auteur b { color: #818cf8; }
-        .reve-contenu { line-height: 1.6; font-size: 1.05rem; margin-bottom: 25px; color: #f3f4f6; word-wrap: break-word; }
+        /* Titre du Rêve en Doré Foncé (Or Professionnel pour la lecture) */
+        .reve-titre { font-size: 1.5rem; font-weight: 800; color: #b45309; margin: 0 0 6px 0; line-height: 1.2; }
+        .reve-auteur { font-size: 0.85rem; color: #4b5563; margin-bottom: 20px; font-weight: 500; }
+        .reve-auteur b { color: #f97316; } /* Nom de l'auteur en orange */
+        
+        /* Contenu du Rêve en Noir Limpide */
+        .reve-contenu { line-height: 1.6; font-size: 1.05rem; margin-bottom: 25px; color: #111827; word-wrap: break-word; }
 
-        /* Secção de Comentários */
+        /* Section Commentaires style Chat Épuré */
         .comment-section {
-            background: rgba(0, 0, 0, 0.25);
+            background: #fdf8f2; /* Fond crème très subtil */
             padding: 20px;
             border-radius: 20px;
+            border: 1px solid #ffedd5;
             box-sizing: border-box;
         }
-        .comment-section h4 { font-size: 0.85rem; font-weight: 700; color: #818cf8; text-transform: uppercase; margin: 0 0 15px 0; letter-spacing: 1px; }
+        .comment-section h4 { font-size: 0.85rem; font-weight: 700; color: #b45309; text-transform: uppercase; margin: 0 0 15px 0; letter-spacing: 1px; }
 
+        /* Bulles de Commentaire Blanches */
         .comment { 
-            background: rgba(255,255,255,0.02);
+            background: #ffffff;
             padding: 14px;
             border-radius: 14px;
             margin-bottom: 12px;
-            border-left: 3px solid #6366f1;
+            border-left: 4px solid #f97316; /* Bordure latérale en Orange */
+            border-top: 1px solid #ffedd5;
+            border-right: 1px solid #ffedd5;
+            border-bottom: 1px solid #ffedd5;
             box-sizing: border-box;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
         }
-        .comment b { color: #facc15; font-size: 0.9rem; }
-        .comment-date { font-size: 0.75rem; color: #6b7280; float: right; margin-left: 10px; }
-        .comment p { margin: 6px 0 0 0; font-size: 0.95rem; color: #e5e7eb; word-wrap: break-word; }
+        .comment b { color: #b45309; font-size: 0.9rem; font-weight: 700; } /* Nom en Doré */
+        .comment-date { font-size: 0.75rem; color: #9ca3af; float: right; margin-left: 10px; font-weight: 500; }
+        .comment p { margin: 6px 0 0 0; font-size: 0.95rem; color: #1f2937; word-wrap: break-word; }
 
-        /* Formulação da Resposta */
+        /* Zone de Texte pour Réponse */
         .reply-form { margin-top: 20px; display: flex; flex-direction: column; align-items: flex-end; }
         
         .reply-form textarea {
             width: 100%;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: #ffffff;
+            border: 2px solid #e5e7eb;
             border-radius: 14px;
-            color: white;
+            color: #000000; /* Texte tapé en noir */
             padding: 14px;
             font-size: 0.95rem;
             resize: none;
             box-sizing: border-box;
             font-family: inherit;
-            transition: border-color 0.2s, background 0.2s;
+            transition: all 0.2s ease;
         }
-        .reply-form textarea:focus { outline: none; border-color: #6366f1; background: rgba(255, 255, 255, 0.08); }
+        .reply-form textarea:focus { 
+            outline: none; 
+            border-color: #f97316; 
+            background: #ffffff;
+            box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.15);
+        }
 
+        /* Bouton Répondre : Orange avec écriture noire */
         .btn-reply {
-            background: #6366f1;
-            color: white;
+            background: #f97316;
+            color: #000000;
             border: none;
-            padding: 12px 24px;
+            padding: 12px 28px;
             border-radius: 50px;
             margin-top: 12px;
             font-weight: 700;
             font-size: 0.9rem;
             cursor: pointer;
-            width: auto; /* Responsivo: Alinha à direita no PC */
-            transition: transform 0.1s ease, background 0.2s;
+            width: auto;
+            box-shadow: 0 4px 12px rgba(249, 115, 22, 0.2);
+            transition: transform 0.1s ease, background-color 0.2s;
         }
-        .btn-reply:hover { background: #4f46e5; }
+        .btn-reply:hover { background: #ea580c; }
         .btn-reply:active { transform: scale(0.97); }
 
-        .login-msg { font-size: 0.9rem; text-align: center; margin-top: 20px; color: #9ca3af; padding: 10px; }
-        .login-msg a { color: #818cf8; text-decoration: none; font-weight: 700; }
+        /* Message de Connexion obligatoire */
+        .login-msg { font-size: 0.9rem; text-align: center; margin-top: 20px; color: #4b5563; padding: 10px; font-weight: 500; }
+        .login-msg a { color: #f97316; text-decoration: none; font-weight: 700; }
         .login-msg a:hover { text-decoration: underline; }
 
-        /* Media Query para Dispositivos Móveis */
+        /* État Vide */
+        .empty-state { text-align: center; margin-top: 100px; color: #9ca3af; }
+        .empty-icon { font-size: 3.5rem; margin-bottom: 15px; }
+
+        /* Ajustements pour Téléphones */
         @media (max-width: 500px) {
             .container { padding: 12px; }
             .reve-card { padding: 18px; border-radius: 20px; margin-bottom: 20px; }
             .comment-section { padding: 14px; }
-            .btn-reply { width: 100%; } /* Fica largo e tátil no telemóvel */
+            .btn-reply { width: 100%; } /* Le bouton s'élargit sur mobile */
         }
     </style>
 </head>
@@ -117,13 +150,12 @@
                     <h4>Discussion</h4>
                     {% for com in reve.commentaires.all %}
                         <div class="comment">
-                            <!-- Filtro corrigido para mostrar data amigável se necessário -->
                             <span class="comment-date">{{ com.date_publication|date:"d/m H:i" }}</span>
                             <b>{{ com.auteur.username }}</b>
                             <p>{{ com.texte }}</p>
                         </div>
                     {% empty %}
-                        <p style="font-size: 0.85rem; color: #6b7280; font-style: italic; text-align: center; margin: 15px 0;">Soyez le premier à répondre...</p>
+                        <p style="font-size: 0.85rem; color: #7c2d12; font-style: italic; text-align: center; margin: 15px 0; font-weight: 500;">Soyez le premier à répondre...</p>
                     {% endfor %}
                     
                     {% if user.is_authenticated %}
@@ -141,9 +173,9 @@
                 </div>
             </div>
         {% empty %}
-            <div style="text-align: center; margin-top: 100px; color: #6b7280;">
-                <div style="font-size: 3.5rem; margin-bottom: 15px;">🌌</div>
-                <p style="font-size: 1.1rem;">Le ciel est vide pour l'instant...</p>
+            <div class="empty-state">
+                <div class="empty-icon">🌌</div>
+                <p style="font-size: 1.1rem; font-weight: 500;">Le ciel est vide pour l'instant...</p>
             </div>
         {% endfor %}
     </div>
