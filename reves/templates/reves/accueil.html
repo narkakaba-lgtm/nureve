@@ -2,15 +2,14 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- Meta tag viewport correta para responsividade impecável -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NUREVE</title>
-    <!-- CSS ultra léger -->
-    <link href="https://jsdelivr.net" rel="stylesheet">
     <style>
-        /* Empêche tout mouvement bizarre sur mobile */
+        /* Bloqueia deslizes laterais indesejados em telemóveis */
         html, body { 
             overflow-x: hidden; 
-            height: 100%; 
+            min-height: 100vh; 
             margin: 0; 
             padding: 0; 
             background: #111827; 
@@ -22,25 +21,35 @@
             justify-content: center;
             font-family: system-ui, -apple-system, sans-serif;
             color: white;
-            background: linear-gradient(180deg, #111827 0%, #1f2937 100%);
+            background: radial-gradient(circle at top, #1e1b4b 0%, #111827 100%);
+            padding: 20px;
+            box-sizing: border-box;
         }
 
-        /* Cadre fixe et centré */
+        /* Contentor adaptável: Semelhante a uma app no PC, ecrã total no telemóvel */
         .app-container {
             width: 100%;
-            max-width: 450px; /* Taille idéale pour mobile et centré sur PC */
-            padding: 25px;
+            max-width: 450px;
+            padding: 40px 30px;
             text-align: center;
+            background: rgba(31, 41, 55, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            box-sizing: border-box;
+            transition: all 0.3s ease;
         }
 
-        h1 { font-weight: 800; font-size: 2.5rem; letter-spacing: -1px; margin-bottom: 5px; }
-        .tagline { color: #9ca3af; font-size: 1rem; margin-bottom: 35px; }
+        h1 { font-weight: 800; font-size: 2.6rem; letter-spacing: -1px; margin: 0 0 8px 0; }
+        .tagline { color: #9ca3af; font-size: 1.05rem; margin: 0 0 40px 0; }
 
-        /* Boutons larges et tactiles */
+        /* Botões táteis largos para telemóvel e responsivos */
         .btn-box {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 14px;
         }
 
         .btn-nav {
@@ -48,27 +57,44 @@
             border-radius: 14px;
             font-weight: 600;
             text-decoration: none;
-            transition: 0.2s;
+            transition: transform 0.1s ease, background-color 0.2s ease;
             border: none;
             font-size: 1rem;
+            display: block;
+            box-sizing: border-box;
         }
 
         .btn-main { background: #6366f1; color: white; }
-        .btn-sec { background: rgba(255,255,255,0.08); color: white; border: 1px solid rgba(255,255,255,0.1); }
-        .btn-prem { background: #f59e0b; color: #451a03; }
+        .btn-main:hover { background: #4f46e5; }
+        
+        .btn-sec { background: rgba(255,255,255,0.06); color: white; border: 1px solid rgba(255,255,255,0.1); }
+        .btn-sec:hover { background: rgba(255,255,255,0.12); }
+        
+        .btn-prem { background: #f59e0b; color: #451a03; width: 100%; }
+        .btn-prem:hover { background: #d97706; }
 
-        .btn-nav:active { transform: scale(0.98); }
+        /* Feedback tátil imediato ao clicar no telemóvel */
+        .btn-nav:active { transform: scale(0.97); }
 
         .premium-zone {
             margin-top: 40px;
-            padding: 20px;
-            background: rgba(245, 158, 11, 0.05);
+            padding: 24px 20px;
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.03) 0%, rgba(245, 158, 11, 0.08) 100%);
             border-radius: 20px;
-            border: 1px solid rgba(245, 158, 11, 0.2);
+            border: 1px solid rgba(245, 158, 11, 0.15);
         }
 
-        .user-info { color: #818cf8; margin-bottom: 20px; font-weight: 500; }
-        .logout-btn { background: none; border: none; color: #ef4444; font-size: 0.85rem; margin-top: 15px; opacity: 0.8; }
+        .user-info { color: #a5b4fc; margin-bottom: 25px; font-weight: 500; font-size: 1.1rem; }
+        
+        .logout-form { margin-top: 15px; }
+        .logout-btn { background: none; border: none; color: #f87171; font-size: 0.9rem; font-weight: 500; cursor: pointer; opacity: 0.8; transition: opacity 0.2s; }
+        .logout-btn:hover { opacity: 1; text-decoration: underline; }
+
+        /* Media Query: Ajustes específicos para ecrãs muito pequenos (Telemóveis antigos) */
+        @media (max-width: 380px) {
+            .app-container { padding: 25px 15px; border-radius: 0; background: transparent; border: none; box-shadow: none; }
+            h1 { font-size: 2.2rem; }
+        }
     </style>
 </head>
 <body>
@@ -85,7 +111,7 @@
                 <a href="{% url 'mes_reves' %}" class="btn-nav btn-sec">📖 Mon Journal</a>
                 <a href="{% url 'espace_public' %}" class="btn-nav btn-sec">🌍 Espace Public</a>
                 
-                <form action="{% url 'logout' %}" method="post">
+                <form action="{% url 'logout' %}" method="post" class="logout-form">
                     {% csrf_token %}
                     <button type="submit" class="logout-btn">Se déconnecter</button>
                 </form>
@@ -99,7 +125,7 @@
 
         <div class="premium-zone">
             <a href="{% url 'abonnement' %}" class="btn-nav btn-prem">⭐ Mode Premium (3$)</a>
-            <p style="font-size: 0.8rem; margin-top: 10px; color: #9ca3af; margin-bottom: 0;">
+            <p style="font-size: 0.85rem; margin-top: 12px; color: #9ca3af; margin-bottom: 0; line-height: 1.4;">
                 Stockage illimité et badges exclusifs.
             </p>
         </div>
