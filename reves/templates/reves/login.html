@@ -2,15 +2,15 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Connexion - NUREVE</title>
-    <link href="https://jsdelivr.net" rel="stylesheet">
     <style>
-        /* Style identique à l'accueil pour la cohérence */
+        /* Base fluida idêntica ao ecrã inicial */
         html, body { 
             overflow-x: hidden; 
-            height: 100%; 
+            min-height: 100vh; 
             margin: 0; 
+            padding: 0; 
             background: #111827; 
         }
 
@@ -20,53 +20,113 @@
             justify-content: center;
             font-family: system-ui, -apple-system, sans-serif;
             color: white;
-            background: linear-gradient(180deg, #111827 0%, #1f2937 100%);
+            background: radial-gradient(circle at top, #1e1b4b 0%, #111827 100%);
+            padding: 20px;
+            box-sizing: border-box;
         }
 
+        /* Contentor adaptável com efeito Glassmorphism */
         .login-container {
             width: 100%;
-            max-width: 400px;
-            padding: 30px;
+            max-width: 420px;
+            padding: 40px 30px;
             text-align: center;
+            background: rgba(31, 41, 55, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            box-sizing: border-box;
         }
 
-        h1 { font-weight: 800; font-size: 2rem; margin-bottom: 30px; letter-spacing: -1px; }
+        h1 { font-weight: 800; font-size: 2.2rem; margin: 0 0 35px 0; letter-spacing: -1px; }
 
-        /* Style des champs de formulaire Django */
-        p { text-align: left; margin-bottom: 15px; }
-        label { display: block; font-size: 0.85rem; color: #9ca3af; margin-bottom: 5px; font-weight: 500; }
-        input { 
+        /* Estilização avançada dos blocos de formulário do Django */
+        form p { 
+            text-align: left; 
+            margin: 0 0 20px 0; 
+            display: flex;
+            flex-direction: column;
+        }
+        
+        form label { 
+            display: block; 
+            font-size: 0.85rem; 
+            color: #9ca3af; 
+            margin-bottom: 8px; 
+            font-weight: 600; 
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        form input { 
             width: 100%; 
-            padding: 14px; 
-            border-radius: 12px; 
-            border: 1px solid rgba(255,255,255,0.1); 
-            background: rgba(255,255,255,0.05); 
+            padding: 16px; 
+            border-radius: 14px; 
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+            background: rgba(255, 255, 255, 0.04); 
             color: white;
             font-size: 1rem;
+            box-sizing: border-box; /* IMPORTANTE: Mantém o input alinhado no telemóvel */
+            transition: all 0.2s ease;
         }
-        input:focus { outline: none; border-color: #6366f1; background: rgba(255,255,255,0.08); }
+        form input:focus { 
+            outline: none; 
+            border-color: #6366f1; 
+            background: rgba(255, 255, 255, 0.08); 
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+        }
 
+        /* Bloco elegante para erros de validação (ex: senha incorreta) */
+        .errorlist {
+            padding: 12px 16px;
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            color: #f87171;
+            border-radius: 12px;
+            list-style: none;
+            text-align: left;
+            font-size: 0.85rem;
+            margin: 0 0 20px 0;
+        }
+        .errorlist li { margin: 0; }
+
+        /* Botão largo e tátil */
         .btn-submit {
             background: #6366f1;
             color: white;
             padding: 16px;
             border-radius: 14px;
             font-weight: 600;
+            font-size: 1rem;
             border: none;
             width: 100%;
             margin-top: 10px;
-            transition: 0.2s;
+            cursor: pointer;
+            transition: transform 0.1s ease, background 0.2s;
+            box-sizing: border-box;
         }
-        .btn-submit:active { transform: scale(0.98); }
+        .btn-submit:hover { background: #4f46e5; }
+        .btn-submit:active { transform: scale(0.97); }
 
+        /* Links inferiores */
         .footer-link { 
             margin-top: 25px; 
             display: block; 
             color: #9ca3af; 
             text-decoration: none; 
-            font-size: 0.9rem;
+            font-size: 0.95rem;
+            transition: color 0.2s;
         }
         .footer-link strong { color: #818cf8; }
+        .footer-link:hover { color: white; }
+
+        /* Media Query para ecrãs muito pequenos */
+        @media (max-width: 440px) {
+            body { padding: 10px; }
+            .login-container { padding: 30px 20px; border-radius: 20px; }
+        }
     </style>
 </head>
 <body>
@@ -77,7 +137,7 @@
         <form method="post">
             {% csrf_token %}
             
-            {# Django insère les champs ici #}
+            {# Se houverem erros globais no formulário, o Django desenha-os com a classe .errorlist #}
             {{ form.as_p }}
             
             <button type="submit" class="btn-submit">Se connecter</button>
@@ -86,21 +146,11 @@
         <a href="{% url 'signup' %}" class="footer-link">
             Pas encore de compte ? <strong>S'inscrire</strong>
         </a>
-        <a href="{% url 'accueil' %}" class="footer-link" style="margin-top: 10px; font-size: 0.8rem;">
+        
+        <a href="{% url 'accueil' %}" class="footer-link" style="margin-top: 15px; font-size: 0.85rem; opacity: 0.7;">
             ← Retour à l'accueil
         </a>
     </div>
 
-    <script>
-        // Ce petit script rend les inputs de Django compatibles avec notre design
-        window.onload = function() {
-            var inputs = document.getElementsByTagName('input');
-            for(var i=0; i<inputs.length; i++) {
-                if(inputs[i].type !== 'hidden') {
-                    inputs[i].classList.add('form-control-custom');
-                }
-            }
-        };
-    </script>
 </body>
 </html>
