@@ -2,62 +2,73 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Espace Public - NUREVE</title>
-    <link href="https://jsdelivr.net" rel="stylesheet">
     <style>
+        /* Base e fluidos globais */
         html, body { margin: 0; background: #111827; font-family: system-ui, -apple-system, sans-serif; color: white; }
-        body { background: linear-gradient(180deg, #111827 0%, #1f2937 100%); min-height: 100vh; padding-bottom: 50px; }
+        body { background: radial-gradient(circle at top, #1e1b4b 0%, #111827 100%); min-height: 100vh; padding-bottom: 60px; box-sizing: border-box; }
 
-        .container { max-width: 600px; margin: auto; padding: 20px; }
-        h1 { text-align: center; font-weight: 800; font-size: 1.8rem; margin-bottom: 30px; letter-spacing: -1px; }
+        .container { max-width: 600px; margin: auto; padding: 20px; box-sizing: border-box; }
+        h1 { text-align: center; font-weight: 800; font-size: 2rem; margin: 20px 0 40px 0; letter-spacing: -1px; }
         
-        .btn-home { text-decoration: none; color: #9ca3af; font-size: 0.9rem; margin-bottom: 20px; display: inline-block; }
+        .btn-home { text-decoration: none; color: #9ca3af; font-size: 0.95rem; margin-bottom: 25px; display: inline-flex; align-items: center; gap: 5px; transition: color 0.2s; }
+        .btn-home:hover { color: white; }
 
-        /* Carte de Rêve Moderne */
+        /* Cartão de Sonho Adaptável */
         .reve-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(31, 41, 55, 0.4);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
             padding: 25px;
             border-radius: 24px;
             margin-bottom: 30px;
             box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            box-sizing: border-box;
         }
 
-        .reve-titre { font-size: 1.4rem; font-weight: 800; color: #facc15; margin-bottom: 5px; }
-        .reve-auteur { font-size: 0.85rem; color: #9ca3af; margin-bottom: 15px; }
+        .reve-titre { font-size: 1.5rem; font-weight: 800; color: #facc15; margin: 0 0 6px 0; line-height: 1.2; }
+        .reve-auteur { font-size: 0.85rem; color: #9ca3af; margin-bottom: 20px; }
         .reve-auteur b { color: #818cf8; }
-        .reve-contenu { line-height: 1.6; font-size: 1.05rem; margin-bottom: 25px; color: #f3f4f6; }
+        .reve-contenu { line-height: 1.6; font-size: 1.05rem; margin-bottom: 25px; color: #f3f4f6; word-wrap: break-word; }
 
-        /* Section Commentaires Style "Chat" */
+        /* Secção de Comentários */
         .comment-section {
-            background: rgba(0, 0, 0, 0.2);
-            padding: 15px;
-            border-radius: 18px;
+            background: rgba(0, 0, 0, 0.25);
+            padding: 20px;
+            border-radius: 20px;
+            box-sizing: border-box;
         }
-        .comment-section h4 { font-size: 0.9rem; font-weight: 700; color: #818cf8; text-transform: uppercase; margin-bottom: 15px; letter-spacing: 1px; }
+        .comment-section h4 { font-size: 0.85rem; font-weight: 700; color: #818cf8; text-transform: uppercase; margin: 0 0 15px 0; letter-spacing: 1px; }
 
         .comment { 
-            background: rgba(255,255,255,0.03);
-            padding: 12px;
-            border-radius: 12px;
-            margin-bottom: 10px;
+            background: rgba(255,255,255,0.02);
+            padding: 14px;
+            border-radius: 14px;
+            margin-bottom: 12px;
             border-left: 3px solid #6366f1;
+            box-sizing: border-box;
         }
         .comment b { color: #facc15; font-size: 0.9rem; }
-        .comment-date { font-size: 0.7rem; color: #6b7280; float: right; }
-        .comment p { margin: 5px 0 0 0; font-size: 0.9rem; color: #d1d5db; }
+        .comment-date { font-size: 0.75rem; color: #6b7280; float: right; margin-left: 10px; }
+        .comment p { margin: 6px 0 0 0; font-size: 0.95rem; color: #e5e7eb; word-wrap: break-word; }
 
-        /* Formulaire de réponse stylisé */
+        /* Formulação da Resposta */
+        .reply-form { margin-top: 20px; display: flex; flex-direction: column; align-items: flex-end; }
+        
         .reply-form textarea {
             width: 100%;
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 14px;
             color: white;
-            padding: 12px;
-            font-size: 0.9rem;
+            padding: 14px;
+            font-size: 0.95rem;
             resize: none;
+            box-sizing: border-box;
+            font-family: inherit;
+            transition: border-color 0.2s, background 0.2s;
         }
         .reply-form textarea:focus { outline: none; border-color: #6366f1; background: rgba(255, 255, 255, 0.08); }
 
@@ -65,18 +76,29 @@
             background: #6366f1;
             color: white;
             border: none;
-            padding: 8px 20px;
+            padding: 12px 24px;
             border-radius: 50px;
-            margin-top: 10px;
+            margin-top: 12px;
             font-weight: 700;
-            font-size: 0.85rem;
-            width: 100%;
-            transition: 0.2s;
+            font-size: 0.9rem;
+            cursor: pointer;
+            width: auto; /* Responsivo: Alinha à direita no PC */
+            transition: transform 0.1s ease, background 0.2s;
         }
-        .btn-reply:active { transform: scale(0.98); }
+        .btn-reply:hover { background: #4f46e5; }
+        .btn-reply:active { transform: scale(0.97); }
 
-        .login-msg { font-size: 0.8rem; text-align: center; margin-top: 15px; color: #9ca3af; }
+        .login-msg { font-size: 0.9rem; text-align: center; margin-top: 20px; color: #9ca3af; padding: 10px; }
         .login-msg a { color: #818cf8; text-decoration: none; font-weight: 700; }
+        .login-msg a:hover { text-decoration: underline; }
+
+        /* Media Query para Dispositivos Móveis */
+        @media (max-width: 500px) {
+            .container { padding: 12px; }
+            .reve-card { padding: 18px; border-radius: 20px; margin-bottom: 20px; }
+            .comment-section { padding: 14px; }
+            .btn-reply { width: 100%; } /* Fica largo e tátil no telemóvel */
+        }
     </style>
 </head>
 <body>
@@ -95,16 +117,17 @@
                     <h4>Discussion</h4>
                     {% for com in reve.commentaires.all %}
                         <div class="comment">
-                            <span class="comment-date">{{ com.date_publication|date:"H:i" }}</span>
+                            <!-- Filtro corrigido para mostrar data amigável se necessário -->
+                            <span class="comment-date">{{ com.date_publication|date:"d/m H:i" }}</span>
                             <b>{{ com.auteur.username }}</b>
                             <p>{{ com.texte }}</p>
                         </div>
                     {% empty %}
-                        <p style="font-size: 0.8rem; color: #6b7280; font-style: italic; text-align: center;">Soyez le premier à répondre...</p>
+                        <p style="font-size: 0.85rem; color: #6b7280; font-style: italic; text-align: center; margin: 15px 0;">Soyez le premier à répondre...</p>
                     {% endfor %}
                     
                     {% if user.is_authenticated %}
-                        <form method="post" class="reply-form mt-3">
+                        <form method="post" class="reply-form">
                             {% csrf_token %}
                             <input type="hidden" name="reve_id" value="{{ reve.id }}">
                             <textarea name="texte" placeholder="Votre réponse..." rows="2" required></textarea>
@@ -119,8 +142,8 @@
             </div>
         {% empty %}
             <div style="text-align: center; margin-top: 100px; color: #6b7280;">
-                <div style="font-size: 3rem; margin-bottom: 10px;">🌌</div>
-                <p>Le ciel est vide pour l'instant...</p>
+                <div style="font-size: 3.5rem; margin-bottom: 15px;">🌌</div>
+                <p style="font-size: 1.1rem;">Le ciel est vide pour l'instant...</p>
             </div>
         {% endfor %}
     </div>
