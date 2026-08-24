@@ -5,43 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NUREVE - Écrire un rêve</title>
     <style>
-        /* Design unificado e proteção contra quebras em mobile */
+        /* Base fluide et fond clair premium */
         html, body { 
             margin: 0; 
             padding: 0;
-            background: #111827; 
+            background: #f9fafb; 
             font-family: system-ui, -apple-system, sans-serif;
-            color: white;
+            color: #111827; /* Écriture en noir */
         }
 
         body {
             display: flex;
             align-items: center;
             justify-content: center;
-            background: radial-gradient(circle at top, #1e1b4b 0%, #111827 100%);
+            background: radial-gradient(circle at top, #ffffff 0%, #fff7ed 100%);
             min-height: 100vh;
             padding: 30px 20px;
             box-sizing: border-box;
         }
 
-        /* Contentor adaptável com efeito Glassmorphism */
+        /* Conteneur style "Carte de Luxe" */
         .write-container {
             width: 100%;
             max-width: 500px;
             padding: 40px 30px;
-            background: rgba(31, 41, 55, 0.4);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            background: #ffffff; /* Fond blanc pur */
             border-radius: 24px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border: 2px solid #facc15; /* Bordure Dorée */
+            box-shadow: 0 20px 40px rgba(249, 115, 22, 0.06);
             box-sizing: border-box;
         }
 
-        h1 { font-weight: 800; font-size: 2rem; margin: 0 0 8px 0; letter-spacing: -1px; text-align: center; }
-        .subtitle { color: #9ca3af; font-size: 0.95rem; margin: 0 0 35px 0; text-align: center; line-height: 1.4; }
+        h1 { font-weight: 800; font-size: 2rem; margin: 0 0 8px 0; letter-spacing: -1px; text-align: center; color: #111827; }
+        .subtitle { color: #4b5563; font-size: 0.95rem; margin: 0 0 35px 0; text-align: center; line-height: 1.4; }
 
-        /* Blocos de formulário gerados pelo Django */
+        /* Alignement des champs générés par Django */
         form p { 
             margin: 0 0 20px 0; 
             display: flex;
@@ -51,44 +49,51 @@
         label { 
             display: block; 
             font-size: 0.85rem; 
-            color: #818cf8; 
+            color: #b45309; /* Doré foncé pro */
             margin-bottom: 8px; 
             font-weight: 600; 
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
         
-        /* Inputs e Textarea 100% fluídos e responsivos */
+        /* Formulaires stylisés propres et responsifs */
         input, textarea, select { 
             width: 100%; 
             padding: 16px; 
             border-radius: 14px; 
-            border: 1px solid rgba(255,255,255,0.1); 
-            background: rgba(255,255,255,0.04); 
-            color: white;
+            border: 2px solid #e5e7eb; 
+            background: #f9fafb; 
+            color: #000000; /* Texte tapé en noir */
             font-size: 1rem;
-            font-family: inherit; /* Garante que usa a mesma fonte em qualquer telemóvel */
-            box-sizing: border-box; /* IMPORTANTE: Impede que o campo saia do ecrã */
+            font-family: inherit;
+            box-sizing: border-box; 
             transition: all 0.2s ease;
         }
 
         textarea { 
             min-height: 160px; 
             line-height: 1.6;
-            resize: vertical; /* Permite redimensionar apenas para baixo no PC */
+            resize: vertical;
+        }
+
+        /* Checkbox spécifique pour la visibilité publique */
+        input[type="checkbox"] {
+            width: auto;
+            margin-right: 10px;
+            cursor: pointer;
         }
 
         input:focus, textarea:focus, select:focus { 
             outline: none; 
-            border-color: #6366f1; 
-            background: rgba(255,255,255,0.08);
-            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+            border-color: #f97316; /* Lueur orange */
+            background: #ffffff;
+            box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.15);
         }
 
-        /* Botão de gravação largo e ergonómico */
+        /* Bouton Enregistrer : Orange avec texte noir */
         .btn-save {
-            background: #6366f1;
-            color: white;
+            background: #f97316;
+            color: #000000;
             padding: 18px;
             border-radius: 14px;
             font-weight: 700;
@@ -96,26 +101,27 @@
             border: none;
             width: 100%;
             margin-top: 10px;
-            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
+            box-shadow: 0 4px 12px rgba(249, 115, 22, 0.2);
             cursor: pointer;
-            transition: transform 0.1s ease, background 0.2s;
+            transition: transform 0.1s ease, background-color 0.2s;
             box-sizing: border-box;
         }
-        .btn-save:hover { background: #4f46e5; }
+        .btn-save:hover { background: #ea580c; }
         .btn-save:active { transform: scale(0.97); }
 
         .back-link { 
             margin-top: 25px; 
             display: block; 
-            color: #9ca3af; 
+            color: #4b5563; 
             text-decoration: none; 
             font-size: 0.95rem;
             text-align: center;
+            font-weight: 600;
             transition: color 0.2s;
         }
-        .back-link:hover { color: white; }
+        .back-link:hover { color: #f97316; }
 
-        /* Ajustes finos para ecrãs muito pequenos */
+        /* Ajustements pour mobile */
         @media (max-width: 480px) {
             body { padding: 15px 10px; }
             .write-container { padding: 30px 20px; border-radius: 20px; }
@@ -133,19 +139,17 @@
         <form method="POST">
             {% csrf_token %}
             
-            {# O Django renderiza os campos estruturados de forma limpa #}
             {{ form.as_p }}
             
             <button type="submit" class="btn-save">Enregistrer dans mon journal</button>
         </form>
 
-        <a href="{% url 'accueil' %}" class="back-link">
+        <a href="{% url 'mes_reves' %}" class="back-link">
             ← Annuler et revenir
         </a>
     </div>
 
     <script>
-        // Insere placeholders amigáveis caso o formulário do Django venha vazio
         window.onload = function() {
             var textareas = document.getElementsByTagName('textarea');
             for(var i=0; i<textareas.length; i++) {
