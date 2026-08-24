@@ -2,10 +2,10 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mon Journal - NUREVE</title>
-    <link href="https://jsdelivr.net" rel="stylesheet">
     <style>
+        /* Reset fluído e fundo dinâmico */
         html, body { 
             margin: 0; 
             padding: 0; 
@@ -15,15 +15,19 @@
         }
 
         body {
-            background: linear-gradient(180deg, #111827 0%, #1f2937 100%);
+            background: radial-gradient(circle at top, #1e1b4b 0%, #111827 100%);
             min-height: 100vh;
+            box-sizing: border-box;
         }
 
+        /* Contentor adaptável com espaço extra no fundo para o botão */
         .journal-container {
             width: 100%;
             max-width: 500px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 20px 20px 100px 20px; /* 100px garante que o botão nunca tape o texto */
+            box-sizing: border-box;
+            position: relative;
         }
 
         .header-box {
@@ -34,37 +38,44 @@
             padding-top: 10px;
         }
 
-        h1 { font-weight: 800; font-size: 1.5rem; margin: 0; letter-spacing: -0.5px; }
+        h1 { font-weight: 800; font-size: 1.6rem; margin: 0; letter-spacing: -0.5px; }
 
         .btn-back {
             text-decoration: none;
             color: #9ca3af;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             font-weight: 500;
+            transition: color 0.2s;
         }
+        .btn-back:hover { color: white; }
 
-        /* Cartes de rêves style "Bulles" */
+        /* Cartões de Sonho com efeito de vidro e quebra automática */
         .reve-card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(31, 41, 55, 0.4);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
             border-radius: 20px;
-            padding: 20px;
-            margin-bottom: 15px;
-            transition: 0.2s;
+            padding: 22px;
+            margin-bottom: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            box-sizing: border-box;
         }
 
         .reve-card h3 { 
             color: #818cf8; 
-            font-size: 1.1rem; 
+            font-size: 1.2rem; 
             font-weight: 700; 
-            margin-bottom: 8px; 
+            margin: 0 0 10px 0;
+            line-height: 1.3;
         }
 
         .reve-card p { 
             color: #e5e7eb; 
-            font-size: 0.95rem; 
-            line-height: 1.5; 
-            margin-bottom: 12px; 
+            font-size: 1rem; 
+            line-height: 1.6; 
+            margin: 0 0 14px 0; 
+            word-wrap: break-word; /* Evita que textos longos quebrem o layout */
         }
 
         .reve-date { 
@@ -77,15 +88,16 @@
 
         .empty-msg {
             text-align: center;
-            margin-top: 50px;
+            margin-top: 80px;
             color: #6b7280;
+            line-height: 1.5;
         }
 
-        /* Bouton flottant pour écrire un nouveau rêve */
+        /* Botão Flutuante Inteligente (Responsivo) */
         .btn-add {
             position: fixed;
             bottom: 30px;
-            right: 20px;
+            right: calc(50% - 230px); /* Alinha com a borda do container no PC */
             background: #6366f1;
             color: white;
             width: 60px;
@@ -94,10 +106,22 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
-            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.4);
+            font-size: 1.8rem;
+            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.45);
             text-decoration: none;
             z-index: 1000;
+            transition: transform 0.1s ease, background 0.2s;
+        }
+        .btn-add:hover { background: #4f46e5; }
+        .btn-add:active { transform: scale(0.93); }
+
+        /* Ajustes específicos para ecrãs de telemóvel */
+        @media (max-width: 540px) {
+            .btn-add {
+                right: 20px; /* Em telemóveis, cola na lateral direita de forma clássica */
+            }
+            .journal-container { padding: 15px 15px 90px 15px; }
+            h1 { font-size: 1.4rem; }
         }
     </style>
 </head>
@@ -117,12 +141,13 @@
             </div>
         {% empty %}
             <div class="empty-msg">
+                <div style="font-size: 3rem; margin-bottom: 15px;">✍️</div>
                 <p>Votre journal est vide...<br>Levez-vous et notez votre premier rêve !</p>
             </div>
         {% endfor %}
     </div>
 
-    <!-- Bouton flottant pour mobile -->
+    <!-- Bouton flottant pour ajouter un rêve -->
     <a href="{% url 'nouveau_reve' %}" class="btn-add">＋</a>
 
 </body>
