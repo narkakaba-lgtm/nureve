@@ -5,44 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inscription - NUREVE</title>
     <style>
-        /* Base fluida e unificada com o ecra inicial */
+        /* Base fluide et fond clair premium */
         html, body { 
             margin: 0; 
             padding: 0;
-            background: #111827; 
+            background: #f9fafb; 
             font-family: system-ui, -apple-system, sans-serif;
-            color: white;
+            color: #111827; /* Écriture en noir */
         }
 
         body {
             display: flex;
             align-items: center;
             justify-content: center;
-            background: radial-gradient(circle at top, #1e1b4b 0%, #111827 100%);
+            background: radial-gradient(circle at top, #ffffff 0%, #fff7ed 100%);
             min-height: 100vh;
             padding: 40px 20px;
             box-sizing: border-box;
         }
 
-        /* Contentor adaptável com efeito Glassmorphism */
+        /* Conteneur style "Carte de Luxe" */
         .signup-container {
             width: 100%;
             max-width: 460px;
             padding: 40px 30px;
             text-align: center;
-            background: rgba(31, 41, 55, 0.4);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            background: #ffffff; /* Fond blanc pur */
             border-radius: 24px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border: 2px solid #facc15; /* Bordure Dorée */
+            box-shadow: 0 20px 40px rgba(249, 115, 22, 0.06);
             box-sizing: border-box;
         }
 
-        h1 { font-weight: 800; font-size: 2rem; margin: 0 0 8px 0; letter-spacing: -1px; }
-        .subtitle { color: #9ca3af; font-size: 0.95rem; margin: 0 0 35px 0; line-height: 1.4; }
+        h1 { font-weight: 800; font-size: 2rem; margin: 0 0 8px 0; letter-spacing: -1px; color: #111827; }
+        .subtitle { color: #4b5563; font-size: 0.95rem; margin: 0 0 35px 0; line-height: 1.4; }
 
-        /* Estilização dos blocos de formulário gerados pelo Django */
+        /* Alignement des éléments du formulaire Django */
         form p { 
             text-align: left; 
             margin: 0 0 24px 0; 
@@ -50,52 +48,52 @@
             flex-direction: column;
         }
         
-        label { 
+        form label { 
             display: block; 
             font-size: 0.85rem; 
-            color: #818cf8; 
+            color: #b45309; /* Doré foncé haut de gamme et lisible */
             margin-bottom: 8px; 
             font-weight: 600; 
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
         
-        /* Inputs 100% responsivos */
-        input { 
+        /* Champs de saisie 100% fluides */
+        form input { 
             width: 100%; 
             padding: 15px; 
             border-radius: 14px; 
-            border: 1px solid rgba(255, 255, 255, 0.1); 
-            background: rgba(255, 255, 255, 0.04); 
-            color: white;
+            border: 2px solid #e5e7eb; 
+            background: #f9fafb; 
+            color: #000000; /* Texte tapé par l'utilisateur en noir */
             font-size: 1rem;
             font-family: inherit;
-            box-sizing: border-box; /* IMPORTANTE: Impede o campo de quebrar o ecra */
+            box-sizing: border-box;
             transition: all 0.2s ease;
         }
-        input:focus { 
+        form input:focus { 
             outline: none; 
-            border-color: #6366f1; 
-            background: rgba(255, 255, 255, 0.08); 
-            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+            border-color: #f97316; /* Lueur orange vif */
+            background: #ffffff; 
+            box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.15);
         }
 
-        /* Textos de ajuda do Django (Regras de palavra-passe) */
+        /* Consignes de sécurité de mot de passe générées par Django */
         .helptext { 
             display: block; 
             font-size: 0.8rem; 
-            color: #9ca3af; /* Cor mais clara para melhor leitura */
+            color: #4b5563; /* Gris foncé pour une excellente lecture sur fond blanc */
             margin-top: 8px; 
             line-height: 1.4;
             padding-left: 2px;
         }
 
-        /* Lista de Erros de Validação Estilizada */
+        /* Liste des erreurs de validation (ex: mots de passe différents) */
         .errorlist {
             padding: 12px 16px;
-            background: rgba(239, 68, 68, 0.1);
-            border: 1px solid rgba(239, 68, 68, 0.2);
-            color: #f87171;
+            background: #fef2f2;
+            border: 1px solid #fee2e2;
+            color: #dc2626;
             border-radius: 12px;
             list-style: none;
             text-align: left;
@@ -104,38 +102,39 @@
         }
         .errorlist li { margin: 0; }
 
-        /* Botão largo e tátil */
+        /* Bouton de validation : Orange avec texte noir */
         .btn-submit {
-            background: #6366f1;
-            color: white;
+            background: #f97316;
+            color: #000000;
             padding: 16px;
             border-radius: 14px;
-            font-weight: 600;
+            font-weight: 700;
             font-size: 1rem;
             border: none;
             width: 100%;
             margin-top: 10px;
             cursor: pointer;
-            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.2);
-            transition: transform 0.1s ease, background 0.2s;
+            box-shadow: 0 4px 12px rgba(249, 115, 22, 0.2);
+            transition: transform 0.1s ease, background-color 0.2s;
             box-sizing: border-box;
         }
-        .btn-submit:hover { background: #4f46e5; }
+        .btn-submit:hover { background: #ea580c; }
         .btn-submit:active { transform: scale(0.97); }
 
-        /* Links de navegação inferiores */
+        /* Liens de bas de page */
         .footer-link { 
             margin-top: 25px; 
             display: block; 
-            color: #9ca3af; 
+            color: #4b5563; 
             text-decoration: none; 
             font-size: 0.95rem;
+            font-weight: 600;
             transition: color 0.2s;
         }
-        .footer-link strong { color: #818cf8; }
-        .footer-link:hover { color: white; }
+        .footer-link strong { color: #f97316; } /* Lien de connexion en orange */
+        .footer-link:hover { color: #000000; }
 
-        /* Media Query para ecrãs pequenos */
+        /* Optimisations pour petits écrans */
         @media (max-width: 480px) {
             body { padding: 20px 10px; }
             .signup-container { padding: 30px 20px; border-radius: 20px; }
@@ -152,7 +151,6 @@
         <form method="post">
             {% csrf_token %}
             
-            {# O Django desenha os campos, ajudas e erros aqui de forma limpa #}
             {{ form.as_p }}
             
             <button type="submit" class="btn-submit">Créer mon compte</button>
@@ -162,7 +160,7 @@
             Déjà inscrit ? <strong>Se connecter</strong>
         </a>
         
-        <a href="{% url 'accueil' %}" class="footer-link" style="margin-top: 15px; font-size: 0.85rem; opacity: 0.7;">
+        <a href="{% url 'accueil' %}" class="footer-link" style="margin-top: 15px; font-size: 0.85rem; opacity: 0.8;">
             ← Retour à l'accueil
         </a>
     </div>
