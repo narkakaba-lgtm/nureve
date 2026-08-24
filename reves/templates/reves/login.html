@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Connexion - NUREVE</title>
     <style>
-        /* Base fluida idêntica ao ecrã inicial */
+        /* Base fluide et fond clair premium */
         html, body { 
             overflow-x: hidden; 
             min-height: 100vh; 
             margin: 0; 
             padding: 0; 
-            background: #111827; 
+            background: #f9fafb; 
         }
 
         body {
@@ -19,30 +19,28 @@
             align-items: center;
             justify-content: center;
             font-family: system-ui, -apple-system, sans-serif;
-            color: white;
-            background: radial-gradient(circle at top, #1e1b4b 0%, #111827 100%);
+            color: #111827; /* Écriture en noir */
+            background: radial-gradient(circle at top, #ffffff 0%, #fff7ed 100%);
             padding: 20px;
             box-sizing: border-box;
         }
 
-        /* Contentor adaptável com efeito Glassmorphism */
+        /* Conteneur style "Carte de Luxe" */
         .login-container {
             width: 100%;
             max-width: 420px;
             padding: 40px 30px;
             text-align: center;
-            background: rgba(31, 41, 55, 0.4);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            background: #ffffff; /* Fond blanc pur */
             border-radius: 24px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border: 2px solid #facc15; /* Bordure Dorée */
+            box-shadow: 0 20px 40px rgba(249, 115, 22, 0.06);
             box-sizing: border-box;
         }
 
-        h1 { font-weight: 800; font-size: 2.2rem; margin: 0 0 35px 0; letter-spacing: -1px; }
+        h1 { font-weight: 800; font-size: 2.2rem; margin: 0 0 35px 0; letter-spacing: -1px; color: #111827; }
 
-        /* Estilização avançada dos blocos de formulário do Django */
+        /* Champs du formulaire générés par Django */
         form p { 
             text-align: left; 
             margin: 0 0 20px 0; 
@@ -53,7 +51,7 @@
         form label { 
             display: block; 
             font-size: 0.85rem; 
-            color: #9ca3af; 
+            color: #b45309; /* Labels en doré foncé lisible */
             margin-bottom: 8px; 
             font-weight: 600; 
             text-transform: uppercase;
@@ -64,26 +62,26 @@
             width: 100%; 
             padding: 16px; 
             border-radius: 14px; 
-            border: 1px solid rgba(255, 255, 255, 0.1); 
-            background: rgba(255, 255, 255, 0.04); 
-            color: white;
+            border: 2px solid #e5e7eb; 
+            background: #f9fafb; 
+            color: #000000; /* Texte tapé par l'utilisateur en noir */
             font-size: 1rem;
-            box-sizing: border-box; /* IMPORTANTE: Mantém o input alinhado no telemóvel */
+            box-sizing: border-box; 
             transition: all 0.2s ease;
         }
         form input:focus { 
             outline: none; 
-            border-color: #6366f1; 
-            background: rgba(255, 255, 255, 0.08); 
-            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+            border-color: #f97316; /* Focus orange */
+            background: #ffffff; 
+            box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.15);
         }
 
-        /* Bloco elegante para erros de validação (ex: senha incorreta) */
+        /* Bloc d'erreurs en cas de mauvaise saisie */
         .errorlist {
             padding: 12px 16px;
-            background: rgba(239, 68, 68, 0.1);
-            border: 1px solid rgba(239, 68, 68, 0.2);
-            color: #f87171;
+            background: #fef2f2;
+            border: 1px solid #fee2e2;
+            color: #dc2626;
             border-radius: 12px;
             list-style: none;
             text-align: left;
@@ -92,37 +90,39 @@
         }
         .errorlist li { margin: 0; }
 
-        /* Botão largo e tátil */
+        /* Bouton de connexion : Orange avec texte noir */
         .btn-submit {
-            background: #6366f1;
-            color: white;
+            background: #f97316;
+            color: #000000;
             padding: 16px;
             border-radius: 14px;
-            font-weight: 600;
+            font-weight: 700;
             font-size: 1rem;
             border: none;
             width: 100%;
             margin-top: 10px;
             cursor: pointer;
-            transition: transform 0.1s ease, background 0.2s;
+            box-shadow: 0 4px 12px rgba(249, 115, 22, 0.2);
+            transition: transform 0.1s ease, background-color 0.2s;
             box-sizing: border-box;
         }
-        .btn-submit:hover { background: #4f46e5; }
+        .btn-submit:hover { background: #ea580c; }
         .btn-submit:active { transform: scale(0.97); }
 
-        /* Links inferiores */
+        /* Liens de bas de page */
         .footer-link { 
             margin-top: 25px; 
             display: block; 
-            color: #9ca3af; 
+            color: #4b5563; 
             text-decoration: none; 
             font-size: 0.95rem;
+            font-weight: 500;
             transition: color 0.2s;
         }
-        .footer-link strong { color: #818cf8; }
-        .footer-link:hover { color: white; }
+        .footer-link strong { color: #f97316; } /* Lien d'inscription mis en valeur en orange */
+        .footer-link:hover { color: #000000; }
 
-        /* Media Query para ecrãs muito pequenos */
+        /* Ajustements spécifiques sur mobile */
         @media (max-width: 440px) {
             body { padding: 10px; }
             .login-container { padding: 30px 20px; border-radius: 20px; }
@@ -137,7 +137,6 @@
         <form method="post">
             {% csrf_token %}
             
-            {# Se houverem erros globais no formulário, o Django desenha-os com a classe .errorlist #}
             {{ form.as_p }}
             
             <button type="submit" class="btn-submit">Se connecter</button>
@@ -147,7 +146,7 @@
             Pas encore de compte ? <strong>S'inscrire</strong>
         </a>
         
-        <a href="{% url 'accueil' %}" class="footer-link" style="margin-top: 15px; font-size: 0.85rem; opacity: 0.7;">
+        <a href="{% url 'accueil' %}" class="footer-link" style="margin-top: 15px; font-size: 0.85rem; opacity: 0.8;">
             ← Retour à l'accueil
         </a>
     </div>
